@@ -88,11 +88,12 @@ class TarifEdfDataUpdateCoordinator(TimestampDataUpdateCoordinator):
 
         return response_json
 
+    @staticmethod
     def get_daily_price(price):
         year = datetime.now().year
         month = datetime.now().month
-        nb_days = monthrange(year, month)
-        return price/12/nb_days
+        nb_days = monthrange(year, month)[1]
+        return round(price/12/nb_days, 2)
 
     async def _async_update_data(self) -> dict[Platform, dict[str, Any]]:
         """Get the latest data from Tarif EDF and updates the state."""
