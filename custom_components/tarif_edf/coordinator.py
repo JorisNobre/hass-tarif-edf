@@ -30,6 +30,8 @@ from .const import (
     TEMPO_OFFPEAK_HOURS
 )
 
+from calendar import monthrange
+
 _LOGGER = logging.getLogger(__name__)
 
 def get_remote_file(url: str):
@@ -86,6 +88,13 @@ class TarifEdfDataUpdateCoordinator(TimestampDataUpdateCoordinator):
 
         return response_json
 
+    @staticmethod
+    def get_daily_price(price):
+        year = datetime.now().year
+        month = datetime.now().month
+        nb_days = monthrange(year, month)[1]
+        return round(price/12/nb_days, 2)
+
     async def _async_update_data(self) -> dict[Platform, dict[str, Any]]:
         """Get the latest data from Tarif EDF and updates the state."""
         data = self.config_entry.data
@@ -123,11 +132,15 @@ class TarifEdfDataUpdateCoordinator(TimestampDataUpdateCoordinator):
                     if data['contract_type'] == CONTRACT_TYPE_BASE:
                         self.data['base_fixe_ttc'] = float(row[4].replace(",", "." ))
                         self.data['base_fixe_ht'] = float(row[3].replace(",", "." ))
+                        self.data['base_fixe_ttc_jour'] = self.get_daily_price(self.data['base_fixe_ttc'])
+                        self.data['base_fixe_ht_jour'] = self.get_daily_price(self.data['base_fixe_ht'])
                         self.data['base_variable_ttc'] = float(row[6].replace(",", "." ))
                         self.data['base_variable_ht'] = float(row[5].replace(",", "." ))
                     elif data['contract_type'] == CONTRACT_TYPE_HPHC:
                         self.data['hphc_fixe_ttc'] = float(row[4].replace(",", "." ))
                         self.data['hphc_fixe_ht'] = float(row[3].replace(",", "." ))
+                        self.data['hphc_fixe_ttc_jour'] = self.get_daily_price(self.data['hphc_fixe_ttc'])
+                        self.data['hphc_fixe_ht_jour'] = self.get_daily_price(self.data['hphc_fixe_ht'])
                         self.data['hphc_variable_hc_ttc'] = float(row[6].replace(",", "." ))
                         self.data['hphc_variable_hc_ht'] = float(row[5].replace(",", "." ))
                         self.data['hphc_variable_hp_ttc'] = float(row[8].replace(",", "." ))
@@ -135,6 +148,8 @@ class TarifEdfDataUpdateCoordinator(TimestampDataUpdateCoordinator):
                     elif data['contract_type'] == CONTRACT_TYPE_TEMPO:
                         self.data['tempo_fixe_ttc'] = float(row[4].replace(",", "." ))
                         self.data['tempo_fixe_ht'] = float(row[3].replace(",", "." ))
+                        self.data['tempo_fixe_ttc_jour'] = self.get_daily_price(self.data['tempo_fixe_ttc'])
+                        self.data['tempo_fixe_ht_jour'] = self.get_daily_price(self.data['tempo_fixe_ht'])
                         self.data['tempo_variable_hc_bleu_ttc'] = float(row[6].replace(",", "." ))
                         self.data['tempo_variable_hc_bleu_ht'] = float(row[5].replace(",", "." ))
                         self.data['tempo_variable_hp_bleu_ttc'] = float(row[8].replace(",", "." ))
