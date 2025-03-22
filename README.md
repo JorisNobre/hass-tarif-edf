@@ -28,6 +28,8 @@ Copy the `tarif_edf` folder from latest release to the `custom_components` folde
 |--------|-------------|------|
 | `sensor.tarif_base_fixe_ttc` | Fixed rate (incl. taxes) | EUR/an |
 | `sensor.tarif_base_fixe_ht` | Fixed rate (excl. taxes) | EUR/an |
+| `sensor.tarif_base_fixe_ttc_jour` | Daily fixed rate (incl. taxes) | EUR/jour |
+| `sensor.tarif_base_fixe_ht_jour` | Daily fixed rate (excl. taxes) | EUR/jour |
 | `sensor.tarif_base_variable_ttc` | Variable rate (incl. taxes) | EUR/kWh |
 | `sensor.tarif_base_variable_ht` | Variable rate (excl. taxes) | EUR/kWh |
 
@@ -36,6 +38,8 @@ Copy the `tarif_edf` folder from latest release to the `custom_components` folde
 |--------|-------------|------|
 | `sensor.tarif_hphc_fixe_ttc` | Fixed rate (incl. taxes) | EUR/an |
 | `sensor.tarif_hphc_fixe_ht` | Fixed rate (excl. taxes) | EUR/an |
+| `sensor.tarif_hphc_fixe_ttc_jour` | Daily fixed rate (incl. taxes) | EUR/jour |
+| `sensor.tarif_hphc_fixe_ht_jour` | Daily fixed rate (excl. taxes) | EUR/jour |
 | `sensor.tarif_hphc_heures_creuses_ttc` | Off-peak hours rate (incl. taxes) | EUR/kWh |
 | `sensor.tarif_hphc_heures_creuses_ht` | Off-peak hours rate (excl. taxes) | EUR/kWh |
 | `sensor.tarif_hphc_heures_pleines_ttc` | Peak hours rate (incl. taxes) | EUR/kWh |
@@ -46,6 +50,8 @@ Copy the `tarif_edf` folder from latest release to the `custom_components` folde
 |--------|-------------|------|
 | `sensor.tarif_tempo_fixe_ttc` | Fixed rate (incl. taxes) | EUR/an |
 | `sensor.tarif_tempo_fixe_ht` | Fixed rate (excl. taxes) | EUR/an |
+| `sensor.tarif_tempo_fixe_ttc_jour` | Daily fixed rate (incl. taxes) | EUR/jour |
+| `sensor.tarif_tempo_fixe_ht_jour` | Daily fixed rate (excl. taxes) | EUR/jour |
 | `sensor.tarif_tempo_couleur` | Current Tempo color | - |
 | `sensor.tarif_tempo_couleur_hier` | Yesterday's Tempo color | - |
 | `sensor.tarif_tempo_couleur_aujourd_hui` | Today's Tempo color | - |
